@@ -8,12 +8,23 @@
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/inAppWebViewButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
         android:layout_marginBottom="348dp"
-        android:text="WEBサイトへ"
+        android:text="アプリ内で開く"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/browserButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="外部ブラウザで開く"
+        app:layout_constraintEnd_toEndOf="@id/inAppWebViewButton"
+        app:layout_constraintStart_toStartOf="@id/inAppWebViewButton"
+        app:layout_constraintTop_toBottomOf="@id/inAppWebViewButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
