@@ -6,6 +6,14 @@ import com.google.firebase.analytics.FirebaseAnalytics
 
 class SendEventHelper(private val context: Context) {
 
+    fun sendClickEvent(paramC: String, paramD: String) {
+        // click_param_name_
+        val bundle = Bundle()
+        bundle.putString("click_param_name_c", paramC)
+        bundle.putString("click_param_name_d", paramD)
+        sendEvent("click_event_name_by_helper", bundle)
+    }
+
     fun sendSignUpEvent(method: String) {
         val bundle = Bundle().apply {
             putString(FirebaseAnalytics.Param.METHOD, method)
@@ -43,6 +51,5 @@ class SendEventHelper(private val context: Context) {
    //
     private fun sendEvent(eventName: String, bundle: Bundle = Bundle()) {
         FirebaseAnalytics.getInstance(context).logEvent(eventName, bundle) // Firebaseへのイベント送信
-
     }
 }
