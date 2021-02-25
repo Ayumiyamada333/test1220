@@ -14,12 +14,27 @@ class SendEventHelper(private val context: Context) {
         sendEvent("click_event_name_by_helper", bundle)
     }
 
+    //Uriのbyをイベント送信
+    fun sendUriparamEvent(launchdBy: String?){
+        val bundle = Bundle()
+        bundle.putString("Uri_param_name", launchdBy)
+        sendEvent("uri_event_name", bundle)
+    }
+
     fun sendSignUpEvent(method: String) {
         val bundle = Bundle().apply {
             putString(FirebaseAnalytics.Param.METHOD, method)
         }
         sendEvent(FirebaseAnalytics.Event.SIGN_UP, bundle)
     }
+
+    fun sendStartMainActivityEvent(launchBy: String?){ //？Null可能
+        val bundle = Bundle().apply {
+            putString("launchBy", launchBy)
+        }
+        sendEvent("StartAppMainActivity", bundle)
+    }
+
 //demoからコピーしただけ(メモ)
 //    fun sendLoginEvent(method: String) {
 //        val bundle = Bundle().apply {

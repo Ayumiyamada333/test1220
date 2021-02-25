@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.logEvent
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.* //app\build.gradleに追加　id 'kotlin-android-extensions'
 
 class MainActivity : AppCompatActivity() {
     private val sendEventHelper by lazy { SendEventHelper(this) } //SendEventHelper呼び出し
@@ -15,28 +15,63 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Urlスキームからの情報を受け取る
+        val uri= intent.data
+        val launchByApplicationName = intent.data?.getQueryParameter("by")
+        sendEventHelper.sendUriparamEvent(launchByApplicationName)
+        println("uri:$uri")
+        if(uri !=null){
+            val byValue= uri.getQueryParameter("by")
+            println("byValue:$byValue")
+        }
+
+        //文字列key_launch_byがあった場合その値を取得する(インテントの場合
+        // )
+        var launchBy = intent.getStringExtra("key_launch_by") //入っていない場合もある(直接アプリ起動した場合など)
+        if(launchBy != null) //Nullじゃない場合にイベントを取得
+        sendEventHelper.sendStartMainActivityEvent(launchBy) //イベント計測
+//        println("launchBy:$launchBy")
+
+        //他アプリを開く
+        openButton.setOnClickListener{
+            sendEventHelper.sendClickEvent("openButton","com.example.addapplication") //イベント計測(クリックイベントを使用)
+            val newIntent = Intent()
+            newIntent.setClassName("com.example.addapplication", "com.example.addapplication.MainActivity")
+            startActivity(newIntent)
+        }
+
+        //ユーザー ID を設定する
+        FirebaseAnalytics.getInstance(this).setUserId("aaaaa")
+        FirebaseAnalytics.getInstance(this).logEvent("eventname") {//パラメータとしてuserIDを取得
+            param("param_user_id", "p_aaaaa") //パラメータとしてuserIDを取得
+        }
+        //アプリ内で開く(イベント)
         inAppWebViewButton.setOnClickListener {
-//            val intent = Intent(this, SubActivity::class.java)
-//            startActivity(intent)
-            sendEventHelper.sendClickEvent("アプリナイデヒラク", "1")
+            sendEventHelper.sendClickEvent("アプリナイデヒラク", "1") //　他ファイルを参照して送る方法
             FirebaseAnalytics.getInstance(this).logEvent("click_event_name") { // 直接FirebaseAnalyticsで送る方法
                 param("click_param_name_a", "アプリ内で開く")
                 param("click_param_name_b", "Apuri Naide Hiraku")
             }
+            //アプリ内ブラウザを開くソース
+            val intent = Intent(this, SubActivity::class.java)
+            startActivity(intent)
         }
-        inAppWebViewButton.setOnClickListener {
+
+        //外部ブラウザで開く(イベント)
+        browserButton.setOnClickListener {
+            sendEventHelper.sendClickEvent("ガイブブラウザデヒラク","2")// 他ファイルを参照して送る方法
+            FirebaseAnalytics.getInstance(this).logEvent("click_event_name") { // 直接FirebaseAnalyticsで送る方法
+                param("click_param_name_a", "外部ブラウザで開く")
+            }
+            //外部ブラウザで開くソース
             val uri = Uri.parse(BROWSER_URL)
             val intent = Intent(Intent.ACTION_VIEW, uri)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra("key_launch_by", "遷移計測_外部ブラウザ") //BROWSER_URLが処理されたタイミングで値を送っている
             startActivity(intent)
         }
-        //ユーザー ID を設定する
-        FirebaseAnalytics.getInstance(this).setUserId("aaaaa")
-        FirebaseAnalytics.getInstance(this).logEvent("eventname") {
-            param("param_user_id", "p_aaaaa")
-        }
     }
-
+    //外部URLを読み込む
     companion object {
         private const val BROWSER_URL = "https://test-webviewapp01.jimdofree.com/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9/"
     }
