@@ -5,6 +5,7 @@ import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 
 class SubActivity : AppCompatActivity() {
+    private val sendEventHelper by lazy { SendEventHelper(this) } //SendEventHelper呼び出し
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

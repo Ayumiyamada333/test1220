@@ -20,7 +20,18 @@
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
-
+        <activity
+            android:name=".ProductActivity"
+            android:label="@string/title_activity_product" />
+        <activity
+            android:name=".CampaignActivity"
+            android:label="@string/title_activity_campaign" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/title_activity_search" />
         <activity
             android:name=".SubActivity"
             android:label="@string/title_activity_sub" />
