@@ -1,5 +1,6 @@
 package com.example.test1220
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -15,14 +16,22 @@ class LoginActivity: AppCompatActivity(){
 
         //MainActivityを開くソースloginButton
         loginButton.setOnClickListener{
-            startActivity(Intent(this, MainActivity::class.java))
+            onLogin()
         }
 
         //MainActivityを開くソースsnsButton
         snsButton.setOnClickListener{
-            startActivity(Intent(this, MainActivity::class.java))
+            onLogin()
         }
+    }
 
+    private fun onLogin(){
+        val prefs = getSharedPreferences( "prefs", Context.MODE_PRIVATE)
+        val editor = prefs.edit()
+        editor.putBoolean("is_login", true)
+        editor.apply() //セーブ
+        startActivity(Intent(this, TopActivity::class.java))
+        finish()
     }
 
 }

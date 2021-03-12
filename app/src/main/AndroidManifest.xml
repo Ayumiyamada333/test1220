@@ -20,6 +20,7 @@
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
+
         <activity
             android:name=".ProductActivity"
             android:label="@string/title_activity_product" />
@@ -35,18 +36,25 @@
         <activity
             android:name=".SubActivity"
             android:label="@string/title_activity_sub" />
-        <activity android:name=".MainActivity">
-            <!--アプリアイコンを押した時に動くIntentFilter-->
+        <activity android:name=".SplashActivity" >
+            <!--アプリアイコンを押した時
+            に動くIntentFilter-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".TopActivity">
             <!--Urlスキーム-->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="test1220" />
+
+                <data
+                    android:host="test1220"
+                    android:scheme="https" />
                 <!--https://test1220-->
             </intent-filter>
         </activity>
