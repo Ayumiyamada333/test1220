@@ -5,15 +5,34 @@
     android:layout_height="match_parent"
     android:background="@android:color/darker_gray">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/inAppWebViewButton"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="EventList"
-        android:textColor="@color/black"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="32dp"
+        android:text="アプリ内で開く"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/browserButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="外部ブラウザで開く"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inAppWebViewButton" />
+
+    <Button
+        android:id="@+id/openButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="別アプリを開く"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/browserButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

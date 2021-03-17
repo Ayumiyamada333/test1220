@@ -5,6 +5,8 @@
     <string name="title_activity_login">ログイン</string>
     <string name="title_activity_campaign">キャンペーン</string>
     <string name="title_activity_product">商品</string>
+    <string name="title_activity_cart">カート</string>
+    <string name="title_activity_productlist">商品一覧</string>
 
     <!--
     This string is used for square devices and overridden by hello_world in

@@ -38,10 +38,20 @@ class SendEventHelper(private val context: Context) {
 
     fun sendSearchEvent(keyWord: String, result: String){
         val param = Bundle().apply {
-            putString("keyword", keyWord)
-            putString("result", result)
+            putString("keyword", keyWord) //パラメータ,変数名アプリにデータ保存
+            putString("result", result) //パラメータ,変数名アプリにデータ保存
         }
-        sendEvent("search_result", param)
+        sendEvent("search_result", param) //イベント名,パラメータ
+    }
+
+    fun sendSearchClickEvent(param1: Int, param2: String, param3: String) {
+        val bundle = Bundle().apply {
+            putInt("parameter_1", param1)
+            putString("parameter_2", param2)
+            putString("parameter_3", param3)
+        }
+
+        sendEvent("Search_action", bundle)
     }
 
     //J検証用
@@ -330,36 +340,6 @@ class SendEventHelper(private val context: Context) {
         }
         sendEvent("Broadcast_Switch", bundle)
     }
-
-
-//demoからコピーしただけ(メモ)
-//    fun sendLoginEvent(method: String) {
-//        val bundle = Bundle().apply {
-//            putString(FirebaseAnalytics.Param.METHOD, method)
-//        }
-//        sendEvent(FirebaseAnalytics.Event.LOGIN, bundle)
-//    }
-//
-//    fun sendSelectItem(id: Int, name: String, type: String) {
-//        val bundle = Bundle().apply {
-//            putString(FirebaseAnalytics.Param.ITEM_ID, "$id")
-//            putString(FirebaseAnalytics.Param.ITEM_NAME, name)
-//            putString(FirebaseAnalytics.Param.CONTENT_TYPE, type)
-//        }
-//        sendEvent(FirebaseAnalytics.Event.SELECT_ITEM, bundle)
-//    }
-//
-//    fun sendShareEvent(shareApplication: String) {
-//        val bundle = Bundle().apply {
-//            putString("sharedBy", shareApplication)
-//        }
-//        val eventName = "share_$shareApplication"
-//        sendEvent(eventName)
-//    }
-
-//    fun sendDefaultEvent(bundle: Bundle) {
-//        FirebaseAnalytics.getInstance(context).setDefaultEventParameters(bundle)
-//    }
 
     private fun sendEvent(eventName: String, bundle: Bundle = Bundle()) {
         FirebaseAnalytics.getInstance(context).logEvent(eventName, bundle) // Firebaseへのイベント送信

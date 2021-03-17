@@ -21,6 +21,13 @@
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
+
+        <activity
+            android:name=".ProductListActivity"
+            android:label="@string/title_activity_productlist" />
+        <activity
+            android:name=".CartActivity"
+            android:label="@string/title_activity_cart" />
         <activity
             android:name=".ProductActivity"
             android:label="@string/title_activity_product" />

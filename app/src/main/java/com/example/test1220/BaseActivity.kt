@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 
 open class BaseActivity: AppCompatActivity() {
 
+    private val sendEventHelper by lazy { SendEventHelper(this) } //SendEventHelper呼び出し
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_top, menu)
         return true
@@ -17,6 +19,9 @@ open class BaseActivity: AppCompatActivity() {
         when(item.itemId) {
             R.id.logoutButton -> {
                 logout()
+            }
+            R.id.cartButton -> {
+                startActivity(Intent(this, CartActivity::class.java))
             }
         }
         return true
