@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.fragment_main.poductButton
 
 class MainFragment : Fragment() {
 
+    private val sendEventHelper by lazy { SendEventHelper(requireContext()) } //SendEventHelper呼び出し
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,6 +40,7 @@ class MainFragment : Fragment() {
         //SearchActivityを開くソース
         searchButton.setOnClickListener {
             activity?.startActivity(Intent(requireContext(), SearchActivity::class.java))
+            sendEventHelper.sendClickEvent("MainFragment", "searchButton")
         }
 
         //商品一覧を開くソース
