@@ -16,6 +16,15 @@ class CartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
+        initView()
+
+        clearButton.setOnClickListener {
+            ProductManager.resetCart()
+            initView()
+        }
+    }
+
+    private fun initView() {
         val product1 = ProductManager.product1
         val product2 = ProductManager.product2
         val productInCardMap = ProductManager.productInCardMap

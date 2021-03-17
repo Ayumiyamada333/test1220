@@ -18,12 +18,9 @@ class SearchActivity : AppCompatActivity() {
         searchButton.setOnClickListener {
             search()
 
-            //検索ボタンのクリックイベント取得(直接)
-            searchButton.setOnClickListener {
-                FirebaseAnalytics.getInstance(this).logEvent("click_event_name") { // 直接FirebaseAnalyticsでデータを送る方法
-                    param("click_param_name_a", "検索") //パラメータ,値
-                    param("click_param_name_b", "ケンサク") //パラメータ,値
-                }
+            FirebaseAnalytics.getInstance(this).logEvent("click_event_name") { // 直接FirebaseAnalyticsでデータを送る方法
+                param("click_param_name_a", "検索") //パラメータ,値
+                param("click_param_name_b", "ケンサク") //パラメータ,値
             }
 
             //検索ボタンのクリックイベント取得(sendEventHelper)
